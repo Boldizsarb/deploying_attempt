@@ -108,10 +108,13 @@ app.get("/login", (req, res) => {
 });
 app.post("/login", userController.login);
 
-
+/* 
 app.listen(WEB_PORT, () => {
   console.log(
     `Example app listening at http://localhost:${WEB_PORT}`,
     chalk.green("✓")
   );
 });
+*/
+
+app.listen(process.env.PORT||3000);
