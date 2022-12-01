@@ -9,6 +9,8 @@ const countriesModel = require("./models/Country");
 const expressSession = require("express-session"); // sessions 
 const User = require("./models/User"); // user
 
+const PORT = process.env.PORT || 3000
+
 
 /**
  * Controllers (route handlers).
