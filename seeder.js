@@ -4,13 +4,18 @@ require("dotenv").config();
 const fs = require("fs").promises;
 const path = require("path");
 const loading = require("loading-cli");
-const { MONGODB_URI, MONGODB__PRODUCTION_URI } = process.env; // the second database as well 
+//const { MONGODB_URI } = process.env;
 
 
 /**
  * constants
  */
-const client = new MongoClient(process.env.NODE_ENV === "production" ? MONGODB__PRODUCTION_URI : MONGODB_URI);
+//const client = new MongoClient(MONGODB_URI);
+const { MONGODB_URI, MONGODB__PRODUCTION_URI } = process.env;
+
+const client = new MongoClient(
+    process.env.NODE_ENV === "production" ? MONGODB__PRODUCTION_URI : MONGODB_URI
+);
 
 async function main() {
   try {
@@ -132,7 +137,7 @@ async function main() {
       { $unwind: "$regions" },
       { $group: { _id: "$regions" } },
       { $project: { name: '$_id', _id: 0 } },
-   { $out: "regions" }
+      { $out: "regions" }
     ]).toArray();
 
 
@@ -157,8 +162,5 @@ async function main() {
     process.exit();
   }
 }
-
-// how to create a collection
-// db.createCollection("tasters")
 
 main();
